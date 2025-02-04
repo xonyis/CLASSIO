@@ -3,7 +3,7 @@ import SideBarComponent from "@/components/SideBarComponent.vue";
 export default {
   data() {
     return {
-      user: localStorage.getItem("user"),
+      user: JSON.parse(localStorage.getItem("user")),
     }
   },
   components: {
@@ -14,7 +14,7 @@ export default {
 
 <template>
   <div class=" flex min-h-screen w-full">
-    <SideBarComponent class="fixed top-0 left-0 w-64 h-full "/>
+    <SideBarComponent :user="user" class="fixed top-0 left-0 w-64 h-full "/>
     <main class="w-full pl-75">
       {{user}}
     </main>
