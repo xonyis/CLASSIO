@@ -13,11 +13,13 @@ export default {
 </script>
 
 <template>
-  <div class=" h-screen flex left-0 top-0">
-    <SideBarComponent class="w-75"/>
-    <main class="border h-200 w-screen">
+  <div class=" flex min-h-screen w-full">
+    <SideBarComponent class="fixed top-0 left-0 w-64 h-full "/>
+    <main class="w-full pl-75">
       {{user}}
     </main>
+
+
   </div>
 </template>
 
