@@ -4,7 +4,7 @@ const mysql = require("mysql2");
 const db = mysql.createConnection({
     host: "localhost",
     user: "root", // Par défaut sous WAMP
-    password: "root", // Laisse vide si tu n’as pas mis de mot de passe
+    password: "", // Laisse vide si tu n’as pas mis de mot de passe
     database: "classio",
 });
 
