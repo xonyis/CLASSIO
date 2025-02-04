@@ -40,7 +40,7 @@ export default {
 
         this.message = response.data.message;
         // ✅ Redirection vers "/dashboard" après connexion réussie
-        this.router.push("/dashboard")
+        this.router.push("/dashboard/dashboardHome")
         this.email = "";
         this.password = "";
         this.username = "";

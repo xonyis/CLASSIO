@@ -14,9 +14,10 @@ export default {
 
 <template>
   <div class=" flex min-h-screen w-full">
-    <SideBarComponent :user="user" class="fixed top-0 left-0 w-64 h-full "/>
-    <main class="w-full pl-75">
-      {{user}}
+    <SideBarComponent />
+    <!-- Contenu principal -->
+    <main class="pl-64 flex-1 p-5 bg-gray-100">
+      <router-view></router-view>
     </main>
 
 

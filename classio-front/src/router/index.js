@@ -41,6 +41,19 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/dashboard/DashboardView.vue'),
+      meta: { requiresAuth: true }, // ✅ Protéger la route
+      children: [
+        { path: "dashboardHome", component: () => import('../views/dashboard/DashboardHome.vue'),},
+        { path: "profile", component: () => import('../views/dashboard/ProfilView.vue'),},     // /dashboard/profile => Profil
+      ],
+    },
+    {
+      path: '/profil',
+      name: 'profil',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/dashboard/ProfilView.vue'),
       meta: { requiresAuth: true } // ✅ Protéger la route
     },
   ],

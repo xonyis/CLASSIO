@@ -1,6 +1,8 @@
 <script>
 import router from "@/router/index.js";
 import {useRouter} from "vue-router";
+import { Users, Mail, BookUser, Backpack, FileBadge } from 'lucide-vue-next';
+
 export default {
   data() {
     return {
@@ -8,45 +10,61 @@ export default {
       router: useRouter()
     }
   },
+  components : {
+    Users,
+    Mail,
+    BookUser,
+    Backpack,
+    FileBadge
+  },
   methods: {
-    goTo() {
+
+    logout() {
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
       this.router.push('/login')
     }
+
   }
 }
 </script>
 
 <template>
-  <nav class="p-5 fixed h-screen left-0 top-0 flex flex-col justify-between ">
-    <ul class="side-list flex flex-col h-80 gap-2  justify-between">
-      <h2 class="text-4xl">Classio</h2>
-      <div class="flex flex-col gap-4" >
-        <li class="nav-item">
-          <a class="w-full inline-block border-2 border-violet-500 hover:bg-violet-500 hover:text-white text-violet-500 font-semibold py-2 px-4 rounded-lg transition-all duration-200 text-center">
-            Bouton Outline
-          </a>
-        </li>
-        <li class="nav-item">
-          <i class="bi bi-card-list"></i>
-          <a class="  w-full inline-block border-2 border-violet-500 hover:bg-violet-500 hover:text-white text-violet-500 font-semibold py-2 px-4 rounded-lg transition-all duration-200 text-center">
-            Bouton Outline
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="  w-full inline-block border-2 border-violet-500 hover:bg-violet-500 hover:text-white text-violet-500 font-semibold py-2 px-4 rounded-lg transition-all duration-200 text-center">
-            Bouton Outline
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="  w-full inline-block border-2 border-violet-500 hover:bg-violet-500 hover:text-white text-violet-500 font-semibold py-2 px-4 rounded-lg transition-all duration-200 text-center">
-            Bouton Out
-          </a>
-        </li>
-      </div>
+  <!-- Sidebar fixe -->
+  <aside class="fixed flex flex-col justify-between gap-10 top-0 left-0 w-64 h-screen border-r-2 border-violet-500 p-5">
+    <h2 @click="this.router.push('/dashboard/dashboardHome')" class="text-3xl font-bold ">Classio</h2>
+    <ul class="space-y-4 flex flex-col justify-between h-80">
 
+      <li>
+        <router-link to="/dashboard/profile" class="text-sm flex items-center gap-2 p-2 border-2 border-violet-500 hover:bg-violet-500 hover:text-white text-violet-500 font-semibold py-2 px-4 rounded-xl transition-all duration-200 text-center">
+          <BookUser />
+          Agenda
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/settings"  class="text-sm flex  items-center gap-2 p-2 border-2 border-violet-500 hover:bg-violet-500 hover:text-white text-violet-500 font-semibold py-2 px-4 rounded-xl transition-all duration-200 text-center">
+          <Mail /> Messagerie
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/settings"  class="text-xs flex items-center gap-2 p-2 border-2 border-violet-500 hover:bg-violet-500 hover:text-white text-violet-500 font-semibold py-2 px-4 rounded-xl transition-all duration-200 text-center">
+          <Backpack />Gestion des Classes
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/settings"  class="text-xs flex items-center gap-2 p-2 border-2 border-violet-500 hover:bg-violet-500 hover:text-white text-violet-500 font-semibold py-2 px-4 rounded-xl transition-all duration-200 text-center">
+          <Users />Gestion des Élèves
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/settings"  class="text-xs flex items-center gap-2 p-2 border-2 border-violet-500 hover:bg-violet-500 hover:text-white text-violet-500 font-semibold py-2 px-4 rounded-xl transition-all duration-200 text-center">
+          <FileBadge />Mes fichiers
+        </router-link>
+      </li>
     </ul>
-    <div class="flex-col flex gap-5 cursor-pointer
-" @click="goTo()">
+
+    <div class="flex-col flex gap-5 cursor-pointer" @click="this.router.push('/dashboard/profile')">
+
       <div class="flex items-center gap-2 profil-container">
         <img :src="user.img" v-if="user.img" class="profil-picture">
         <img src="https://placehold.co/30x30" class="profil-picture" v-else>
@@ -55,13 +73,12 @@ export default {
           <span class="profil-email">{{user.email}}</span>
         </div>
       </div>
-
-      <a class="  w-full inline-block border-2 border-violet-500 hover:bg-violet-500 hover:text-white text-violet-500 font-semibold py-2 px-4 rounded-lg transition-all duration-200 text-center">
+      <button to="/settings"  class="text-sm justify-center flex items-center gap-2 p-2 border-2 border-violet-500 hover:bg-violet-500 hover:text-white text-violet-500 font-semibold py-2 px-4 rounded-xl transition-all duration-200 text-center">
         Déconnexion
-      </a>
+      </button>
     </div>
 
-  </nav>
+  </aside>
 </template>
 
 <style scoped>
