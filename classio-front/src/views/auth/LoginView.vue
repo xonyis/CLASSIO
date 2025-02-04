@@ -1,7 +1,7 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
 import { useRouter } from "vue-router"; // Importer Vue Router
-
+import { saveAuthData } from "@/config/auth.js";
 import api from '../../config/axios.js'
 
 export default {
@@ -32,20 +32,13 @@ export default {
           username: this.username,
         });
 
-        const { token, user } = response.data;
-
-        // ✅ Stocker le token dans localStorage
-        localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(user));
-
-        this.message = response.data.message;
-        // ✅ Redirection vers "/dashboard" après connexion réussie
-        this.router.push("/dashboard/dashboardHome")
-        this.email = "";
-        this.password = "";
-        this.username = "";
+        if (response.data.token) {
+          saveAuthData(response.data.token, response.data.user);
+          this.router.push('/dashboard/dashboardHome'); // Redirige après connexion
+        } else {
+          this.errorMessage = "Identifiants incorrects";
+        }
       } catch (error) {
-        console.log(error)
         this.errorMessage = error.response?.data?.error || "Une erreur est survenue.";
       }
     }

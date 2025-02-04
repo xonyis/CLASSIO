@@ -2,6 +2,7 @@
 import router from "@/router/index.js";
 import {useRouter} from "vue-router";
 import { Users, Mail, BookUser, Backpack, FileBadge } from 'lucide-vue-next';
+import { logout } from "@/config/auth.js";
 
 export default {
   data() {
@@ -20,8 +21,7 @@ export default {
   methods: {
 
     logout() {
-      localStorage.removeItem("user");
-      localStorage.removeItem("token");
+      logout()
       this.router.push('/login')
     }
 
@@ -73,7 +73,7 @@ export default {
           <span class="profil-email">{{user.email}}</span>
         </div>
       </div>
-      <button to="/settings"  class="text-sm justify-center flex items-center gap-2 p-2 border-2 border-violet-500 hover:bg-violet-500 hover:text-white text-violet-500 font-semibold py-2 px-4 rounded-xl transition-all duration-200 text-center">
+      <button @click="logout" to="/settings" class="text-sm justify-center flex items-center gap-2 p-2 border-2 border-violet-500 hover:bg-violet-500 hover:text-white text-violet-500 font-semibold py-2 px-4 rounded-xl transition-all duration-200 text-center">
         Déconnexion
       </button>
     </div>

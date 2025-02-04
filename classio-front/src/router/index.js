@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import { getAuthData } from "@/config/auth.js";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +8,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('../views/dashboard/DashboardView.vue'),
+      component: () => import('../views/auth/LoginView.vue'),
       meta: { requiresAuth: true } // ✅ Protéger la route
     },
     {
@@ -43,18 +44,19 @@ const router = createRouter({
       component: () => import('../views/dashboard/DashboardView.vue'),
       meta: { requiresAuth: true }, // ✅ Protéger la route
       children: [
+        // /dashboard/profile => Profil
         { path: "dashboardHome", component: () => import('../views/dashboard/DashboardHome.vue'),},
-        { path: "profile", component: () => import('../views/dashboard/ProfilView.vue'),},     // /dashboard/profile => Profil
+        { path: "profile", component: () => import('../views/dashboard/ProfilView.vue'),
+          beforeEnter: (to, from, next) => {
+            const auth = getAuthData();
+            if (auth.role !== 'ROLE_ADMIN') {
+              next('/dashboard/dashboardHome'); // Redirection si pas admin
+            } else {
+              next();
+            }
+          }
+        },
       ],
-    },
-    {
-      path: '/profil',
-      name: 'profil',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/dashboard/ProfilView.vue'),
-      meta: { requiresAuth: true } // ✅ Protéger la route
     },
   ],
 })
