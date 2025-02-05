@@ -16,7 +16,7 @@ export default {
   <div class=" flex min-h-screen w-full">
     <SideBarComponent />
     <!-- Contenu principal -->
-    <main class="pl-64 flex-1 p-5 bg-gray-100">
+    <main class="pl-64 flex-1 p-5 bg-slate-100 ">
       <router-view></router-view>
     </main>
 

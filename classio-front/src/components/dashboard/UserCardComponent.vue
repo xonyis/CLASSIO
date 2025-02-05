@@ -31,7 +31,7 @@ export default {
 </script>
 
 <template>
-  <div class="p-5 w-125 border-2 border-violet-500 profils-container flex gap-6 relative rounded-xl shadow-md" >
+  <div class="p-5 w-125 border-2 border-violet-500 profils-container bg-white flex gap-6 relative rounded-xl shadow-md" >
     <button @click="saveInfos()" type="button" class="absolute top-3 right-5"><Save  class="transition-all duration-200 hover:text-blue-500  cursor-pointer " /></button>
     <button @click="changePicture()" type="button" class="absolute bottom-5 left-32"><CirclePlus fill="#4ADE80" size="45" color="#404040" class="hover:text-blue-500  cursor-pointer " /></button>
 

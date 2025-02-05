@@ -31,7 +31,7 @@ export default {
 
 <template>
   <!-- Sidebar fixe -->
-  <aside class="fixed flex flex-col justify-between gap-10 top-0 left-0 w-64 h-screen border-r-2 border-violet-500 p-5">
+  <aside class="bg-gray-50 fixed flex flex-col justify-between gap-10 top-0 left-0 w-64 h-screen border-r-2 border-violet-500 p-5">
     <h2 @click="this.router.push('/dashboard/dashboardHome')" class="text-3xl font-bold cursor-pointer">Classio</h2>
     <ul class="space-y-4 flex flex-col justify-between h-80">
 
